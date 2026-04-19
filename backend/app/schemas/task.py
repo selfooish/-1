@@ -7,7 +7,7 @@ class AttachmentOut(BaseModel):
     name: str
     url: str
     type: Literal["image", "video", "document"]
-    size: int
+    size: int = 0
 
 
 class TaskOut(BaseModel):
@@ -30,7 +30,7 @@ class TaskOut(BaseModel):
 
 class TaskSubmissionCreate(BaseModel):
     content: str = Field(min_length=1)
-    attachments: list[AttachmentOut] = []
+    attachments: list[AttachmentOut] = Field(default_factory=list)
 
 
 class TaskSubmissionOut(BaseModel):
@@ -42,4 +42,3 @@ class TaskSubmissionOut(BaseModel):
     status: Literal["pending", "approved", "rejected"]
     points: int | None = None
     reviewerComment: str | None = None
-

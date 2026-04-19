@@ -1,4 +1,4 @@
-from pydantic import Field
+﻿from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     jwt_expire_days: int = Field(default=7, alias="JWT_EXPIRE_DAYS")
     cors_origins_raw: str = Field(default="http://localhost:5173", alias="CORS_ORIGINS")
     database_url: str = Field(
-        default="postgresql+psycopg://postgres:postgres@127.0.0.1:5432/labor_platform",
+        default="mysql+pymysql://root:password@127.0.0.1:3306/labor_platform?charset=utf8mb4",
         alias="DATABASE_URL",
     )
     db_echo: bool = Field(default=False, alias="DB_ECHO")
@@ -28,3 +28,4 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+

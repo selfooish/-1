@@ -39,6 +39,7 @@ async function handleSubmit() {
       name: file.name,
       url: `local-upload://${encodeURIComponent(file.name)}`,
       type: file.raw?.type?.startsWith('video/') ? 'video' : 'image',
+      size: file.size ?? file.raw?.size ?? 0,
     }))
 
     await taskStore.submitTask(taskId.value, content.value.trim(), attachments)
