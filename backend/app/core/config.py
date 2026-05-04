@@ -1,4 +1,6 @@
-﻿from pydantic import Field
+﻿import os
+
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -17,7 +19,7 @@ class Settings(BaseSettings):
     jwt_expire_days: int = Field(default=7, alias="JWT_EXPIRE_DAYS")
     cors_origins_raw: str = Field(default="http://localhost:5173", alias="CORS_ORIGINS")
     database_url: str = Field(
-        default="mysql+pymysql://root:password@127.0.0.1:3306/labor_platform?charset=utf8mb4",
+        default="mysql+pymysql://root:123456@127.0.0.1:3306/labor_platform?charset=utf8mb4",
         alias="DATABASE_URL",
     )
     db_echo: bool = Field(default=False, alias="DB_ECHO")
@@ -26,6 +28,7 @@ class Settings(BaseSettings):
     def cors_origins(self) -> list[str]:
         return [item.strip() for item in self.cors_origins_raw.split(",") if item.strip()]
 
-
+print(f"🔍 Current working directory: {os.getcwd()}")
+print(f"🔍 .env file exists: {os.path.exists('.env')}")
 settings = Settings()
-
+print(f"🔍 DATABASE_URL: {settings.database_url}")
